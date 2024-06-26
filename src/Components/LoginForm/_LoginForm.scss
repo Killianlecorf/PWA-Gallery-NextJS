@@ -1,0 +1,14 @@
+.loginForm{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .loginFormModal{
+        background-color: rgb(243, 243, 243);
+        width: 50vw;
+        height: 50vh;
+        
+    }
+}
