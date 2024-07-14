@@ -1,0 +1,35 @@
+.registerForm{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .registerFormModal{
+        background-color: rgb(243, 243, 243);
+        width: 50vw;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .formInputRegister{
+            height: 80%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+            input{
+                width: 25%;
+                height: 25px;
+                margin: 10px;
+            }
+            
+            button{
+                margin-top: 20px;
+            }
+        }
+    }
+}
