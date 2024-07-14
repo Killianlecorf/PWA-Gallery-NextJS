@@ -1,11 +1,15 @@
-import LoginForm from "@/Components/LoginForm/LoginForm";
+"use client";
+import useAuth from '../hooks/useAuth';
 
-export default function Home() {
+export default function Register() {
+
+  useAuth()
+
   return (
     <main>
-        <div>
-            <LoginForm />
-        </div>    
+      <div>
+        <p>page</p>
+      </div>
     </main>
   );
 }

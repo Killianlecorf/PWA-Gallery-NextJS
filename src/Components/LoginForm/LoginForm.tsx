@@ -44,12 +44,14 @@ const LoginForm = () => {
         <div className='loginForm'>
             <div className="loginFormModal">
                 <h1>Login</h1>
-                <label >Name</label>
-                <input type="text" name='name' onChange={handleChange} required/>
-                <label >Password</label>
-                <input type="password" name='password' onChange={handleChange} required/>
-                <p>{errorMessage}</p>
-                <button onClick={submitForm}>Ce connecter</button>
+                <div className="formInputLogin">
+                    <label >Name</label>
+                    <input type="text" name='name' onChange={handleChange} required/>
+                    <label >Password</label>
+                    <input type="password" name='password' onChange={handleChange} required/>
+                    <p>{errorMessage}</p>
+                    <button onClick={submitForm}>Ce connecter</button>
+                </div>
             </div>
         </div>
     );
