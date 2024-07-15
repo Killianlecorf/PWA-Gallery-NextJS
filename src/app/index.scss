@@ -1,0 +1,44 @@
+.mainPage{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .displayConnexionButton{
+        width: 80%;
+        height: 10vh;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        button{
+            width: 150px;
+            height: 50px;
+            margin-right: 20px;
+            color: white;
+            background-color: blue;
+            border: 2px solid blue;
+            cursor: pointer;
+
+            &:hover{
+                color: blue;
+                background-color: white;
+                border: 2px solid blue;
+            }
+        }
+    }
+
+    .allGalery{
+        width: 80%;
+        height: auto;
+
+        .privateGalery{
+            margin-bottom: 50px;
+        }
+
+        .publicGalery{
+            margin-bottom: 50px;
+        }
+    }
+}
