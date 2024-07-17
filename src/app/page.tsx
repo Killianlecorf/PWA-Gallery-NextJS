@@ -11,6 +11,8 @@ export default function Home() {
   const token = Cookies.get('token');
   
   const displayButtonConnexion = () => {
+    console.log(token);
+    
     if (!token) {
       return (
         <div className='displayConnexionButton'>
@@ -24,10 +26,10 @@ export default function Home() {
       )
     }
 
-
     return (
         <div className='displayConnexionButton'>
-            <button>Delete user</button>
+            <button>Supprimer son compte</button>
+            <button>Se déconnecter</button>
         </div>
     );
   }
