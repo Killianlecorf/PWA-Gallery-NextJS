@@ -2,6 +2,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import "../RegisterForm/_RegisterForm.scss";
 import fetchApi from '@/utils/fetchApi'
+import { useRouter } from 'next/navigation'
 
 interface IformData {
     name: string;
@@ -10,6 +11,7 @@ interface IformData {
 
 const RegisterForm = () => {
 
+    const Router = useRouter();
     const [ formData, setFormData ] = useState<IformData>({
         name: "",
         password: ""
@@ -29,11 +31,12 @@ const RegisterForm = () => {
 
         
         try {
-            await fetchApi('/user/','POST', formData)
+            await fetchApi('/user/register','POST', formData)
             setFormData({
                     name: '',
                     password: '',
                 })
+            Router.push('/login')
         } catch (error: any) {
             console.error(error);
             setErrorMessage('Une erreur est survenue, veuillez réessayer plus tard');
