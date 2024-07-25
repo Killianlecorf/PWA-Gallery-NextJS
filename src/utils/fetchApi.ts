@@ -3,12 +3,14 @@ const request = async (url: string, method: string, bodyContent?: any): Promise<
         let options: RequestInit = {
             method,
             credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            }
         };
 
-        if (method !== 'GET' && method !== 'DELETE') {
+        if (bodyContent instanceof FormData) {
+            options.body = bodyContent;
+        } else {
+            options.headers = {
+                'Content-Type': 'application/json'
+            };
             options.body = JSON.stringify(bodyContent);
         }
 
@@ -26,13 +28,15 @@ const request = async (url: string, method: string, bodyContent?: any): Promise<
             data: null
         };
 
-        if (response.status === 200) {
+        if (response.ok) {
             sentResponse.data = await response.json();
+        } else {
+            sentResponse.message = await response.text(); 
         }
 
         return sentResponse;
     } catch (error) {
-        console.error(error);
+        console.error('Request failed:', error);
         return {
             ok: false,
             status: 500,

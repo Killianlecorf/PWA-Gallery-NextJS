@@ -11,15 +11,13 @@ const ImageContent: React.FC<ImageContentProps> = ({ id, url, uploadDate }) => {
     const date = new Date(uploadDate);
 
     return (
-        <div className='ImageContent'>
-            <div key={id} className="galleryItem">
-                <img 
-                    src={`http://localhost:6053/${url}`} 
-                    alt={`Image ${id}`} 
-                    className="galleryImage"
-                />
-                <p>Uploaded on: {date.toLocaleDateString()}</p>
-            </div>
+        <div key={id} className="galleryItem">
+            <img 
+                src={`http://localhost:6053/${url}`} 
+                alt={`Image ${id}`} 
+                className="galleryImage"
+            />
+            <p>Uploaded on: {date.toLocaleDateString()}</p>
         </div>
     );
 };
