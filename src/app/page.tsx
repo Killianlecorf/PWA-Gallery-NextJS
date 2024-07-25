@@ -2,18 +2,47 @@
 import Cookies from 'js-cookie';
 import Link from 'next/link';
 import './index.scss'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FileDropzone from '@/Components/fileDropzone/FIleDropzone';
 import useAuth from '@/hooks/useAuth';
 import fetchApi from '@/utils/fetchApi';
+import ImageContent from '@/Components/ImageContent/ImageContent';
+
+interface Picture {
+    _id: string;
+    url: string;
+    public: boolean;
+    user: string;
+    uploadDate: string;
+}
 
 export default function Home() {
     const [files, setFiles] = useState<File[]>([]);
     const { isAuthenticated, loading } = useAuth();
-    
-    if (loading) {
-        return <div>Chargement...</div>;
-    }
+    const [publicPictures, setPublicPictures] = useState<Picture[]>([])
+
+    useEffect(() => {
+        const displayPublicImages = async () => {
+            try {
+                const response = await fetchApi('/pictures', 'GET');
+                console.log('Response:', response);
+                
+                if (response.ok && response.data) {
+                    const data: Picture[] = response.data;
+                    setPublicPictures(data);
+                    console.log("Public images fetched successfully.");
+                } else {
+                    throw new Error(response.message || 'Unknown error');
+                }
+                
+            } catch (error: any) {
+                console.log('Erreur lors de la récupération des images publiques : ' + error.message);
+            }
+        };
+
+        displayPublicImages();
+    }, []);
+
 
     const handleLogOut = async () => {
         try {
@@ -79,6 +108,12 @@ export default function Home() {
         }
     }
 
+    console.log(publicPictures);
+
+    if (loading) {
+        return <div>Chargement...</div>;
+    }
+
   return (
     <main className='mainPage'>
         {displayButtonConnexion()}
@@ -87,6 +122,13 @@ export default function Home() {
             {displayDropzone()}
             <div className="publicGalery">
                 <h2>Public galery</h2>
+                {publicPictures.length > 0 ? (
+                    publicPictures.map(picture => (
+                        <ImageContent id={picture._id} url={picture.url} uploadDate={picture.uploadDate} />
+                    ))
+                ) : (
+                    <p>Auncune photos publique n'est disponible.</p>
+                )}
             </div>
         </div>
     </main>
