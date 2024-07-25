@@ -1,4 +1,4 @@
-import type { Metadata, } from "next";
+import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/../Styles/index.scss";
 
@@ -21,7 +21,10 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
         <meta name="theme-color" content="#000000" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+          {children}
+      </body>
     </html>
   );
 }
+

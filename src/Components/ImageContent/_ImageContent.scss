@@ -1,0 +1,27 @@
+.ImageContent {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+
+    .imageCenter{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+
+        .galleryItem {
+            width: 15%;
+            height: auto;
+            background-color: rgb(233, 232, 232);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 2%;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+}
