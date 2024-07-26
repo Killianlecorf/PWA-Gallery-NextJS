@@ -9,6 +9,48 @@
         display: flex;
         flex-wrap: wrap;
 
+
+
+        .privateImage{
+            width: 15%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+
+            .galleryItem {
+                width: auto;
+                height: auto;
+                background-color: rgb(233, 232, 232);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 2%;
+    
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+
+            button{
+                width: 150px;
+                height: 50px;
+                margin-right: 20px;
+                color: white;
+                background-color: red;
+                border: 2px solid red;
+                cursor: pointer;
+    
+                &:hover{
+                    color: red;
+                    background-color: white;
+                    border: 2px solid red;
+                }
+            }
+        }
+
         .galleryItem {
             width: 15%;
             height: auto;

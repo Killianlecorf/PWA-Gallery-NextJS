@@ -8,8 +8,8 @@ interface ImageContentProps {
 }
 
 const ImageContent: React.FC<ImageContentProps> = ({ id, url, uploadDate }) => {
-    const date = new Date(uploadDate);
-
+    const date = new Date(uploadDate)
+    
     return (
         <div key={id} className="galleryItem">
             <img 
@@ -18,6 +18,7 @@ const ImageContent: React.FC<ImageContentProps> = ({ id, url, uploadDate }) => {
                 className="galleryImage"
             />
             <p>Uploaded on: {date.toLocaleDateString()}</p>
+
         </div>
     );
 };
