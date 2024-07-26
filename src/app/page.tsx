@@ -1,5 +1,4 @@
 'use client';
-import Cookies from 'js-cookie';
 import Link from 'next/link';
 import './index.scss'
 import { useEffect, useState } from 'react';
@@ -81,6 +80,17 @@ export default function Home() {
         }
     }
 
+    const deleteUser = async () => {
+        try {
+            const response = await fetchApi(`/user/${informationUser?.id}`, "DELETE")
+            if (response.ok) {
+                window.location.reload()
+            }
+        } catch (error:any) {
+            console.log("Erreur lors de la suppression de l'utilisateur" + error);
+        }
+    }
+ 
     const displayButtonConnexion = () => {
         
         if (!isAuthenticated) {
@@ -98,7 +108,7 @@ export default function Home() {
 
         return (
             <div className='displayConnexionButton'>
-                <button>Supprimer son compte</button>
+                <button onClick={deleteUser}>Supprimer son compte</button>
                 <button onClick={handleLogOut}>Se déconnecter</button>
             </div>
         );
@@ -131,6 +141,7 @@ export default function Home() {
             if (response.ok) {
                 console.log('Files uploaded successfully:', response.data);
                 await displayPublicImages();
+                window.location.reload();
                 setFiles([])
             } else {
                 console.error('Upload error:', response.status, response.message, response.data);
@@ -140,6 +151,21 @@ export default function Home() {
         }
     };
     
+
+    const handleDeleteImage = async (pictureId: string) => {
+        try {
+          const response = await fetchApi(`/pictures/${pictureId}`, 'DELETE');
+          if (response.ok) {
+            console.log('Image successfully deleted');
+            window.location.reload();
+          } else {
+            throw new Error(response.message || 'Erreur inconnue');
+          }
+        } catch (error: any) {
+          console.error('Erreur lors de la suppression de l\'image privée : ' + error.message);
+        }
+      }
+      
      
     const displayDropzone = () => {
         if (isAuthenticated) {
@@ -158,14 +184,25 @@ export default function Home() {
                 {!files ? '' : <button className='StyleButton' onClick={uploadFiles}>Envoyer</button>}
                 <div className="privateGalery">
                     <h2>Private galery</h2>
+                    <div className='ImageContent'>
+                        <div className="imageCenter">
+                            {informationUser?.pictures && informationUser?.pictures.length > 0 ? (
+                                    informationUser?.pictures.map(picture => (
+                                        <div className='privateImage'>
+                                            <ImageContent id={picture._id} url={picture.url} uploadDate={picture.uploadDate} />
+                                            <button className='StyleButton' onClick={() => handleDeleteImage(picture._id)}>Supprimer l'image</button>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p>Auncune photos publique n'est disponible.</p>
+                                )}
+                        </div>
+                    </div>
                 </div>
             </div>
         )
         }
     }
-
-    console.log(files);
-    
 
     if (loading) {
         return <div>Chargement...</div>;
@@ -183,7 +220,7 @@ export default function Home() {
                     <div className="imageCenter">
                         {publicPictures.length > 0 ? (
                             publicPictures.map(picture => (
-                                <ImageContent id={picture._id} url={picture.url} uploadDate={picture.uploadDate} />
+                                <ImageContent id={picture._id} url={picture.url} uploadDate={picture.uploadDate}/>
                                 
                             ))
                         ) : (
