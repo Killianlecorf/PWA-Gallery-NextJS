@@ -36,7 +36,7 @@ const RegisterForm = () => {
                     name: '',
                     password: '',
                 })
-            Router.push('/login')
+            Router.push('/')
         } catch (error: any) {
             console.error(error);
             setErrorMessage('Une erreur est survenue, veuillez réessayer plus tard');
