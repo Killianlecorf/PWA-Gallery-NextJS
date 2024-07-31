@@ -40,6 +40,21 @@
 
         .publicGalery{
             margin-bottom: 50px;
+
+            .ImageContent{
+                width: 100%;
+                height: auto;
+
+                .ImageCenter{
+                    width: 100%;
+                    height: auto;
+
+                    .imageWrapper{
+                        width: 100%;
+                        height: auto;
+                    }
+                }
+            }
         }
     }
 }
