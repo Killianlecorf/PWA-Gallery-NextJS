@@ -214,26 +214,22 @@ export default function Home() {
                 <div className="publicGalery">
                     <h2>Galerie Publique</h2>
                     <div className='ImageContent'>
-                        <div className="imageCenter">
-                            {Object.keys(publicPictures).length > 0 ? (
-                                Object.keys(publicPictures).map(month => (
-                                    <div key={month}>
-                                        <h3>{month}</h3>
-                                        <div className='ImageContent'>
-                                            <div className="imageCenter">
-                                                {publicPictures[month].map(picture => (
-                                                    <div className='imageWrapper' key={picture._id}>
-                                                        <ImageContent id={picture._id} url={picture.url} uploadDate={picture.uploadDate} />
-                                                    </div>
-                                                ))}
-                                            </div>
+                        {Object.keys(publicPictures).length > 0 ? (
+                            Object.keys(publicPictures).map(month => (
+                                <div key={month}>
+                                    <h3>{month}</h3>
+                                    <div className='ImageContent'>
+                                        <div className="imageCenter">
+                                            {publicPictures[month].map(picture => (
+                                                <ImageContent id={picture._id} url={picture.url} uploadDate={picture.uploadDate} />
+                                            ))}
                                         </div>
                                     </div>
-                                ))
-                            ) : (
-                                <p>Aucune photo publique n'est disponible.</p>
-                            )}
-                        </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p>Aucune photo publique n'est disponible.</p>
+                        )}
                     </div>
                 </div>
             </div>
