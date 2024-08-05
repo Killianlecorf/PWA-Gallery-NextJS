@@ -164,6 +164,21 @@ export default function Home() {
         }
     }
 
+    const handleChangeImage = async (pictureId: string) => {
+        try {
+            const response = await fetchApi(`/pictures/visibility/${pictureId}`, 'PUT');
+            if (response.ok) {
+                console.log('Image successfully change visibility');
+                window.location.reload();
+            } else {
+                throw new Error(response.message || 'Erreur inconnue');
+            }
+        } catch (error: any) {
+            console.error('Erreur lors du changelent de l\'image privée : ' + error.message);
+        }
+    }
+
+
     const displayDropzone = () => {
         if (isAuthenticated) {
             return (
@@ -188,6 +203,7 @@ export default function Home() {
                                         <div className='privateImage' key={picture._id}>
                                             <ImageContent id={picture._id} url={picture.url} uploadDate={picture.uploadDate} />
                                             <button className='StyleButton' onClick={() => handleDeleteImage(picture._id)}>Supprimer l'image</button>
+                                            <button className='StyleButton' onClick={() => handleChangeImage(picture._id)}>Modifier la visibilité</button>
                                         </div>
                                     ))
                                 ) : (
